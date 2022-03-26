@@ -1,0 +1,97 @@
+version: 2
+
+sources:
+    - name: staging
+      #For bigquery:
+      database: dtc-de-zoom-camp
+
+      schema: noaa_isd_analytics
+
+      # loaded_at_field: record_loaded_at
+      tables:
+        - name: noaa_external
+        - name: locality_lookup
+         # freshness:
+           # error_after: {count: 6, period: hour}
+
+models: 
+  - name: stg_locality_lookup
+    description: >
+        Locality matched by Google Maps API based on latitude and longitude of weather station.
+    columns:
+      - name: locality
+        description: Locality from Google Maps API.
+      - name : latitude  
+        description : GEOPHYSICAL-POINT-OBSERVATION latitude coordinate, MIN -90000 MAX +90000, SCALING FACTOR 1000
+      - name : longitude  
+        description : GEOPHYSICAL-POINT-OBSERVATION longitude coordinate, SCALING FACTOR 1000
+
+
+
+  - name: stg_observations
+    description: >
+        NOAA ISD 'raw' data.
+    columns:
+      - name: tot_var_char
+        description: TOTAL-VARIABLE-CHARACTERS The total record length = 105 + the value stored in this field. MIN 0000, MAX 9999
+      - name : cat_id  
+        description : FIXED-WEATHER-STATION USAF MASTER STATION CATALOG identifier ASCII
+      - name : wban  
+        description : FIXED-WEATHER-STATION NCEI WBAN identifier MIN 00000 MAX 99999
+      - name : obs_date  
+        description : GEOPHYSICAL-POINT-OBSERVATION date, format YYYYMMDD.
+      - name : obs_time  
+        description : GEOPHYSICAL-POINT-OBSERVATION time, HHMM
+      - name : obs_data_source  
+        description : GEOPHYSICAL-POINT-OBSERVATION data source flag, values 1-9 and A-N.
+      - name : obs_latitude  
+        description : GEOPHYSICAL-POINT-OBSERVATION latitude coordinate, MIN -90000 ,MAX +90000, SCALING FACTOR 1000
+      - name : obs_longitude  
+        description : GEOPHYSICAL-POINT-OBSERVATION longitude coordinate, SCALING FACTOR 1000
+      - name : report_code  
+        description : GEOPHYSICAL-REPORT-TYPE code, 99999 = Missing
+      - name : obs_elevation  
+        description : GEOPHYSICAL-POINT-OBSERVATION elevation dimension, UNITS Meters, 99999 = Missing.
+      - name : station_call  
+        description : FIXED-WEATHER-STATION call letter identifier, ASCII character set, 99999 = Missing.
+      - name : quality_control  
+        description : METEOROLOGICAL-POINT-OBSERVATION quality control process name
+      - name : wind_dir_angle  
+        description : WIND-OBSERVATION direction angle, UNITS Angular Degrees
+      - name : wind_dir_quality  
+        description : WIND-OBSERVATION direction quality code
+      - name : wind_type  
+        description : WIND-OBSERVATION type code
+      - name : wind_speed_rate  
+        description : WIND-OBSERVATION speed rate, UNITS meters per second, SCALING FACTOR 10, 9999 = Missing.
+      - name : wind_speed_quality  
+        description : WIND-OBSERVATION speed quality code, ASCII character set
+      - name : sky_ceiling  
+        escription : SKY-CONDITION-OBSERVATION ceiling height dimension, UNITS Meters
+      - name : sky_ceiling_quality  
+        description : SKY-CONDTION-OBSERVATION ceiling quality code, ASCII character set.
+      - name : sky_ceiling_determination  
+        description : SKY-CONDITION-OBSERVATION ceiling determination code
+      - name : sky_cavok  
+        description : SKY-CONDITION-OBSERVATION CAVOK code
+      - name : vis_distance  
+        description : VISIBILITY-OBSERVATION distance dimension, UNITS Meters
+      - name : vis_distance_quality  
+        description : VISIBILITY-OBSERVATION distance quality code, ASCII character set.
+      - name : vis_variability  
+        description : VISIBILITY-OBSERVATION variability code
+      - name : vis_variability_quality  
+        description : VISIBILITY-OBSERVATION quality variability code
+      - name : air_temp  
+        escription : AIR-TEMPERATURE-OBSERVATION air temperature, UNITS Degrees Celsius, SCALING FACTOR 10, +9999 = Missing
+      - name : air_temp_quality  
+        description : AIR-TEMPERATURE-OBSERVATION air temperature quality code
+      - name : air_dewpoint_temp  
+        description : AIR-TEMPERATURE-OBSERVATION dew point temperature, UNITS Degrees Celsius, SCALING FACTOR 10
+      - name : air_dewpoint_temp_quality  
+        description : AIR-TEMPERATURE-OBSERVATION dew point quality code
+      - name : air_pres_msl  
+        description : ATMOSPHERIC-PRESSURE-OBSERVATION sea level pressure, UNITS Hectopascals, SCALING FACTOR 10
+      - name : air_pres_msl_quality  
+        description : ATMOSPHERIC-PRESSURE-OBSERVATION sea level pressure quality code
+
