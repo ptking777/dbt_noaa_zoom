@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: dim_locality
+    description: >
+      Dimension table Weather Station Location(locality) by latitude and longitude.
+    columns:
+      - name : locality  
+        description : Location of weather station by latitude/longitude
+      - name : latitude  
+        description : Latitude of weather station
+      - name : longitude  
+        description : Longitude of weather station
+
+
+  - name: fct_obs_daily_temp_ts
+    description: >
+      Fact Table - Daily temperatures by location (locality), date, time, year and month 
+    columns:
+      - name : locality  
+        description : Location of weather station by latitude/longitude
+      - name : obs_year  
+        description : Year of Date
+      - name : obs_month  
+        description : Month of Date
+      - name : obs_day  
+        description : Day of Date
+      - name : obs_dayofyear
+        description : Day of year
+      - name : obs_date
+        description : Observation Date
+      - name : obs_time
+        description : Observation Time

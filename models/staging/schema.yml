@@ -39,7 +39,13 @@ models:
       - name : wban  
         description : FIXED-WEATHER-STATION NCEI WBAN identifier MIN 00000 MAX 99999
       - name : obs_date  
+        tests:
+            - not_null:
+                severity: error
         description : GEOPHYSICAL-POINT-OBSERVATION date, format YYYYMMDD.
+        tests:
+            - not_null:
+                severity: warn 
       - name : obs_time  
         description : GEOPHYSICAL-POINT-OBSERVATION time, HHMM
       - name : obs_data_source  
