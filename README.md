@@ -2,6 +2,8 @@
 <h2>DBT Setup</h2>
 
 Install DBT on Docker
+<a href="https://github.com/ptking777/dbt_noaa_zoom/blob/main/Dockerfile">Docker File</a>
+<a href="https://github.com/ptking777/dbt_noaa_zoom/blob/main/docker-compose.yaml">Docker Compose</a>
 
 Try running the following commands:
 - dbt run
