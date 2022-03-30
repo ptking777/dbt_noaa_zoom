@@ -1,3 +1,5 @@
+{{ config(materialized='table') }}
+
 WITH obs_data as (
   SELECT 
     cat_id,
